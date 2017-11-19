@@ -19284,6 +19284,531 @@ Bye!
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Parsowanie-Log&#243;w-Apacha">Parsowanie Log&#243;w Apacha<a class="anchor-link" href="#Parsowanie-Log&#243;w-Apacha">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#9734;-Suma-bajt&#243;w">&#9734; Suma bajt&#243;w<a class="anchor-link" href="#&#9734;-Suma-bajt&#243;w">&#182;</a></h2><p>Chcemy sprawdzić, ile bajtów danych zostało przesłanych, sumując ostatnią kolumnę danych z pliku logów serwera Apache.
+W ostatniej kolumnie zamiast liczby może pojawić się <code>-</code>.
+Taki wiersz należy zignorować.</p>
+<p>Plik logów Apache może wyglądać następująco:</p>
+
+<pre><code>81.107.39.38 - ... "GET /ply/ HTTP/1.1" 200 7587
+81.107.39.38 - ... "GET /favicon.ico HTTP/1.1" 404 133
+81.107.39.38 - ... "GET /ply/bookplug.gif HTTP/1.1" 200 23903
+81.107.39.38 - ... "GET /ply/ply.html HTTP/1.1" 200 97238
+81.107.39.38 - ... "GET /ply/example.html HTTP/1.1" 200 2359
+66.249.72.134 - ... "GET /index.html HTTP/1.1" 200 4447
+81.107.39.38 -  ... "GET /ply/ HTTP/1.1" 304 -
+
+</code></pre>
+<p>W repozytorium znajduje się plik <code>apache.log</code>, który należy przetworzyć.</p>
+<p>Pliki logów mogą ważyć bardzo dużo.
+W związku z tym wczytanie całego pliku do pamięci nie jest najlepszym pomysłem.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Rozwiązanie <a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"> </div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total: 430336
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#9733;-Podej&#347;cie-potokowe">&#9733; Podej&#347;cie potokowe<a class="anchor-link" href="#&#9733;-Podej&#347;cie-potokowe">&#182;</a></h2><p>Rozwiąż poprzednie zadanie w sposób potokowy, tzn. używając kilka wyrażeń listowych.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Hint <a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">bytescolumn</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># &#39;7587&#39;, &#39;133&#39; lub &#39;-&#39; itd.</span>
+<span class="nb">bytes</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># 7587, 133 itd., `-` są pomijane</span>
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Total&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Rozwiązanie <a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"> </div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total: 430336
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#9734;&#9733;-apache2csv.py">&#9734;&#9733; apache2csv.py<a class="anchor-link" href="#&#9734;&#9733;-apache2csv.py">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Napisz skrypt <code>apache2csv.py</code>, który konwertuje logi Apacha do pliku .csv.
+Dzięki temu będzie można wczytać logi do Excela.</p>
+<p>Skrypt powinien przyjmować dwa argumenty: nazwę pliku wejściowego oraz wyjściowego. Jeżeli skrypt jest wywołany w zły sposób, powinna wyświetlić się pomoc.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Kod początkowy<a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">FIELD_NAMES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;ip&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;datetime&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;method&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;url&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;protocol&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;response_code&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;content_length&#39;</span>
+<span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Rozwiązanie<a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"> </div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Overwriting apache2csv.py
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">run</span> -i apache2csv.py apache.log apache.csv
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Oczekiwane zachowanie<a class="tocSkip"></h3>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>chmod <span class="m">700</span> apache2csv.py
+<span class="o">!</span>./apache2csv.py apache.log apache.csv
+<span class="o">!</span>cat apache.csv
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/static/style.css,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/static/logo.png,HTTP/1.0,200,293644
+64.242.88.20,07/Mar/2017:16:24:30 -0800,GET,/login,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:48 -0800,POST,/login?next=/dashboard/,HTTP/1.0,302,-
+64.242.88.20,07/Mar/2017:16:24:49 -0800,GET,/dashboard,HTTP/1.0,200,2002
+64.242.88.20,07/Mar/2017:16:24:59 -0800,GET,/search?q=documentation,HTTP/1.0,200,2002
+64.242.88.20,07/Mar/2017:16:25:13 -0800,GET,/doc/main,HTTP/1.0,200,2345
+64.242.88.20,07/Mar/2017:16:25:23 -0800,GET,/doc/deployment,HTTP/1.0,200,28734
+64.242.88.20,07/Mar/2017:16:26:56 -0800,GET,/doc/authentication,HTTP/1.0,200,22345
+65.123.12.28,07/Mar/2017:16:27:32 -0800,GET,/,HTTP/1.1,200,3399
+64.242.88.20,07/Mar/2017:16:28:05 -0800,GET,/doc/faq,HTTP/1.0,200,58462
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/invalid-url,HTTP/1.0,404,7218
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>./apache2csv.py
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Usage: apache2csv.py input_filename output_filename
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Jak zabrać się za to ćwiczenie?
+Podzielimy je na podzadania.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#9734;-split_line(line)">&#9734; split_line(line)<a class="anchor-link" href="#&#9734;-split_line(line)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">split_line</span><span class="p">(</span><span class="s1">&#39;64.242.88.20 - - [07/Mar/2017:16:24:49 -0800] &quot;GET /dashboard HTTP/1.0&quot; 200 2002</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;content_length&#39;: &#39;2002&#39;,
+ &#39;datetime&#39;: &#39;07/Mar/2017:16:24:49 -0800&#39;,
+ &#39;ip&#39;: &#39;64.242.88.20&#39;,
+ &#39;method&#39;: &#39;GET&#39;,
+ &#39;protocol&#39;: &#39;HTTP/1.0&#39;,
+ &#39;response_code&#39;: &#39;200&#39;,
+ &#39;url&#39;: &#39;/dashboard&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">split_line</span><span class="p">(</span><span class="s1">&#39;64.242.88.20 - - [07/Mar/2017:16:24:48 -0800] &quot;POST /login?next=/dashboard/ HTTP/1.0&quot; 302 -&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;content_length&#39;: &#39;-&#39;,
+ &#39;datetime&#39;: &#39;07/Mar/2017:16:24:48 -0800&#39;,
+ &#39;ip&#39;: &#39;64.242.88.20&#39;,
+ &#39;method&#39;: &#39;POST&#39;,
+ &#39;protocol&#39;: &#39;HTTP/1.0&#39;,
+ &#39;response_code&#39;: &#39;302&#39;,
+ &#39;url&#39;: &#39;/login?next=/dashboard/&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#9734;-run(input_filename,-output_filename)">&#9734; run(input_filename, output_filename)<a class="anchor-link" href="#&#9734;-run(input_filename,-output_filename)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;apache.log&#39;</span><span class="p">,</span> <span class="s1">&#39;apache.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#9734;-main()">&#9734; main()<a class="anchor-link" href="#&#9734;-main()">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">main</span><span class="p">([</span><span class="s1">&#39;apache2csv.py&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Usage: apache2csv.py input_filename output_filename
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">main</span><span class="p">([</span><span class="s1">&#39;apache2csv.py&#39;</span><span class="p">,</span> <span class="s1">&#39;invalid-number-of-arguments&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Usage: apache2csv.py input_filename output_filename
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">main</span><span class="p">([</span><span class="s1">&#39;apache2csv.py&#39;</span><span class="p">,</span> <span class="s1">&#39;apache.log&#39;</span><span class="p">,</span> <span class="s1">&#39;apache.csv&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#9733;-argumenty-opcjonalne">&#9733; argumenty opcjonalne<a class="anchor-link" href="#&#9733;-argumenty-opcjonalne">&#182;</a></h3><p>Załóż, że obie nazwy plików są opcjonalne.
+Jeżeli nie zostaną przekazane, powinniśmy czytać ze standardowego wejścia (<code>sys.stdin</code>) i pisać na standardowe wyjście (<code>sys.stdout</code>).
+Jeżeli podana jest nazwa tylko jednego pliku, należy założyć, że jest nazwa pliku wejściowego.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#9733;-biblioteka-csv">&#9733; biblioteka csv<a class="anchor-link" href="#&#9733;-biblioteka-csv">&#182;</a></h3><p>W standardowej bibliotece Pythona znajduje się moduł <a href="https://docs.python.org/2/library/csv.html"><code>csv</code></a>, który służy do czytania i tworzenia plików <code>.csv</code>.
+Ta biblioteka dba m.in. o poprawne escapowanie znaków specjalnych.
+Zauważ, że jeżeli gdziekolwiek w logach Apacha pojawi się przecinek, on nie jest escapowany w wyjściowym pliku .csv.
+W efekcie, zostanie on potraktowany jako rozpoczęcie nowej kolumny.
+Zastąp ręczne generowanie plików .csv tą biblioteką.</p>
+
+</div>
+</div>
+</div>
     </div>
   </div>
 </body>
