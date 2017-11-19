@@ -17411,6 +17411,25 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">l</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">limit</span><span class="p">:</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">l</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">l</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -17421,7 +17440,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;asdfghijk&#39;</span><span class="p">)</span>
@@ -17437,7 +17456,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
 
@@ -17454,7 +17473,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;asdfghijk&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -17470,7 +17489,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[38]:</div>
+<div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -17487,7 +17506,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;asdfghijk&#39;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -17503,7 +17522,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[4]:</div>
 
 
 
@@ -17520,7 +17539,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;asdfghijk&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -17536,7 +17555,7 @@ Włączenie drugiej z nich powoduje, że zwracane jest tylko pierwsze pięć ele
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[40]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -18251,6 +18270,18 @@ Funkcja powinna zwrócić listę z dodanym elementem.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">append_func</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">seq</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -18262,6 +18293,20 @@ Funkcja powinna zwrócić listę z dodanym elementem.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">append_func</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">seq</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">seq</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
