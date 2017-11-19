@@ -19464,8 +19464,8 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
     <span class="s1">&#39;ip&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;datetime&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;method&#39;</span><span class="p">,</span> 
-    <span class="s1">&#39;url&#39;</span><span class="p">,</span> 
-    <span class="s1">&#39;protocol&#39;</span><span class="p">,</span> 
+    <span class="c1"># &#39;url&#39;, </span>
+    <span class="c1"># &#39;protocol&#39;, </span>
     <span class="s1">&#39;response_code&#39;</span><span class="p">,</span> 
     <span class="s1">&#39;content_length&#39;</span>
 <span class="p">]</span>
@@ -19485,6 +19485,86 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">writefile</span> apache2csv.py
+#!/usr/bin/env python
+import sys
+    
+
+def display_help():
+    print(&quot;Usage: apache2csv.py input_filename output_filename&quot;)
+    
+    
+def split_line(line):
+    parts = line.split()
+    return {
+        &#39;ip&#39;: parts[0],
+        &#39;datetime&#39;: parts[3][1:] + &#39; &#39; + parts[4][:-1],
+        &#39;response_code&#39;: parts[8],
+        &#39;content_length&#39;: parts[9],
+        &#39;method&#39;: parts[5][1:],
+        &#39;url&#39;: parts[6],
+        &#39;protocol&#39;: parts[7][:-1],
+    }
+
+
+FIELD_NAMES = [
+    &#39;ip&#39;, 
+    &#39;datetime&#39;, 
+    &#39;method&#39;, 
+    &#39;url&#39;, 
+    &#39;protocol&#39;, 
+    &#39;response_code&#39;, 
+    &#39;content_length&#39;
+]   
+
+        
+def run(input_filename, output_filename):
+    if input_filename is None:
+        input_stream = sys.stdin
+    else:
+        input_stream = open(input_filename, &#39;r&#39;)
+    
+    if output_filename is None:
+        output_stream = sys.stdout
+    else:
+        output_stream = open(output_filename, &#39;w&#39;)
+    
+    with input_stream, output_stream:
+        for line in input_stream:
+            row = split_line(line)
+            columns = [row[field] for field in FIELD_NAMES]
+            csv_row = &#39;,&#39;.join(columns)
+            output_stream.write(csv_row + &#39;\n&#39;)
+    
+    
+def main(argv):
+    try:
+        input_filename = argv[1]
+    except IndexError:
+        input_filename = None
+        
+    try:
+        output_filename = argv[2]
+    except IndexError:
+        output_filename = None
+    
+    if len(argv) &gt; 3:
+        display_help()
+    else:
+        run(input_filename, output_filename)
+    
+
+if __name__ == &#39;__main__&#39;:
+    main(sys.argv)
+</pre></div>
+
+</div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -19492,10 +19572,11 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 
 <div class="output_area">
 
-<div class="prompt"> </div>
+<div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Writing apache2csv.py
+<pre>Overwriting apache2csv.py
 </pre>
 </div>
 </div>
@@ -19506,7 +19587,7 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">run</span> -i apache2csv.py apache.log apache.csv
@@ -19527,7 +19608,7 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>chmod <span class="m">700</span> apache2csv.py
@@ -19572,10 +19653,10 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>./apache2csv.py
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>./apache2csv.py &lt; apache.log
 </pre></div>
 
 </div>
@@ -19592,7 +19673,19 @@ Dzięki temu będzie można wczytać logi do Excela.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Usage: apache2csv.py input_filename output_filename
+<pre>64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/static/style.css,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/static/logo.png,HTTP/1.0,200,293644
+64.242.88.20,07/Mar/2017:16:24:30 -0800,GET,/login,HTTP/1.0,200,3395
+64.242.88.20,07/Mar/2017:16:24:48 -0800,POST,/login?next=/dashboard/,HTTP/1.0,302,-
+64.242.88.20,07/Mar/2017:16:24:49 -0800,GET,/dashboard,HTTP/1.0,200,2002
+64.242.88.20,07/Mar/2017:16:24:59 -0800,GET,/search?q=documentation,HTTP/1.0,200,2002
+64.242.88.20,07/Mar/2017:16:25:13 -0800,GET,/doc/main,HTTP/1.0,200,2345
+64.242.88.20,07/Mar/2017:16:25:23 -0800,GET,/doc/deployment,HTTP/1.0,200,28734
+64.242.88.20,07/Mar/2017:16:26:56 -0800,GET,/doc/authentication,HTTP/1.0,200,22345
+65.123.12.28,07/Mar/2017:16:27:32 -0800,GET,/,HTTP/1.1,200,3399
+64.242.88.20,07/Mar/2017:16:28:05 -0800,GET,/doc/faq,HTTP/1.0,200,58462
+64.242.88.20,07/Mar/2017:16:24:16 -0800,GET,/invalid-url,HTTP/1.0,404,7218
 </pre>
 </div>
 </div>
@@ -19621,7 +19714,7 @@ Podzielimy je na podzadania.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">split_line</span><span class="p">(</span><span class="s1">&#39;64.242.88.20 - - [07/Mar/2017:16:24:49 -0800] &quot;GET /dashboard HTTP/1.0&quot; 200 2002</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -19637,7 +19730,7 @@ Podzielimy je na podzadania.</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[39]:</div>
 
 
 
@@ -19660,7 +19753,7 @@ Podzielimy je na podzadania.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">split_line</span><span class="p">(</span><span class="s1">&#39;64.242.88.20 - - [07/Mar/2017:16:24:48 -0800] &quot;POST /login?next=/dashboard/ HTTP/1.0&quot; 302 -&#39;</span><span class="p">)</span>
@@ -19676,7 +19769,7 @@ Podzielimy je na podzadania.</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[40]:</div>
 
 
 
@@ -19689,6 +19782,123 @@ Podzielimy je na podzadania.</p>
  &#39;protocol&#39;: &#39;HTTP/1.0&#39;,
  &#39;response_code&#39;: &#39;302&#39;,
  &#39;url&#39;: &#39;/login?next=/dashboard/&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Hint-">Hint <a class="tocSkip" /><a class="anchor-link" href="#Hint-">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;64.242.88.20&#39;</span>
+<span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;POST&#39;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="p">,</span> <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">method</span><span class="p">}</span>
+<span class="n">d</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;ip&#39;: &#39;64.242.88.20&#39;, &#39;method&#39;: &#39;POST&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;64.242.88.20&#39;</span>
+<span class="n">d</span><span class="p">[</span><span class="s1">&#39;method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;POST&#39;</span>
+<span class="n">d</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[27]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;ip&#39;: &#39;64.242.88.20&#39;, &#39;method&#39;: &#39;POST&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="s1">&#39;64.242.88.20&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">d</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;ip&#39;: &#39;64.242.88.20&#39;, &#39;method&#39;: &#39;POST&#39;}</pre>
 </div>
 
 </div>
@@ -19723,10 +19933,84 @@ Podzielimy je na podzadania.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;apache.log&#39;</span><span class="p">,</span> <span class="s1">&#39;apache.csv&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Hint-">Hint <a class="tocSkip" /><a class="anchor-link" href="#Hint-">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;asdf</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;qwer&#39;</span><span class="p">)</span>
+<span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="o">!</span>cat file.txt
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>asdf
+qwer</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">log_record</span> <span class="o">=</span> <span class="n">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">log_record</span><span class="p">[</span><span class="n">field_name</span><span class="p">]</span> <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">FIELD_NAMES</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">r</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span>
+    <span class="k">pass</span>
 </pre></div>
 
 </div>
