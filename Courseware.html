@@ -19326,21 +19326,28 @@ W związku z tym wczytanie całego pliku do pamięci nie jest najlepszym pomysł
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 
-<div class="output_wrapper">
-<div class="output">
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">bytes_as_str</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">bytes_as_str</span> <span class="o">!=</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span>
+                <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">bytes_as_str</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Total: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total</span><span class="p">))</span>
 
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
 
-<div class="output_area">
-
-<div class="prompt"> </div>
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Total: 430336
-</pre>
 </div>
-</div>
-
 </div>
 </div>
 
@@ -19387,6 +19394,20 @@ W związku z tym wczytanie całego pliku do pamięci nie jest najlepszym pomysł
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;apache.log&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">wwwlog</span><span class="p">:</span>
+    <span class="n">bytecolumn</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">wwwlog</span><span class="p">]</span>
+    <span class="nb">bytes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bytecolumn</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;-&#39;</span><span class="p">]</span>
+    <span class="n">sum_</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">bytes</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Total: {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sum_</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -19394,7 +19415,8 @@ W związku z tym wczytanie całego pliku do pamięci nie jest najlepszym pomysł
 
 <div class="output_area">
 
-<div class="prompt"> </div>
+<div class="prompt"></div>
+
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Total: 430336
@@ -19683,6 +19705,22 @@ Podzielimy je na podzadania.</p>
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>otwiera pliki wejściowy i wyjściowy</li>
+<li>iteruje po każdej linii z pliku wejściowego</li>
+<li>dla każdej lini wywołuje napisaną wcześniej funkcję <code>split_line</code></li>
+<li>ze słownika zwróconego przez tą funkcję wybiera jedynie te kolumny, które określono w stałej <code>FIELD_NAMES</code></li>
+<li>konkatenuje wszystkie dane i rozdziela je przecinkami (<code>','.join(columns)</code>)</li>
+<li>dodaje tak utworzony nowy wiersz do pliku .csv</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
@@ -19700,7 +19738,15 @@ Podzielimy je na podzadania.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="&#9734;-main()">&#9734; main()<a class="anchor-link" href="#&#9734;-main()">&#182;</a></h3>
+<h3 id="&#9734;-main(argv)">&#9734; main(argv)<a class="anchor-link" href="#&#9734;-main(argv)">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="--dokonuje-sprawdzenia,-ile-argument&#243;w-przekazano-w-wywo&#322;aniu-programu">- dokonuje sprawdzenia, ile argument&#243;w przekazano w wywo&#322;aniu programu<a class="anchor-link" href="#--dokonuje-sprawdzenia,-ile-argument&#243;w-przekazano-w-wywo&#322;aniu-programu">&#182;</a></h2>
 </div>
 </div>
 </div>
