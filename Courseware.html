@@ -16921,41 +16921,46 @@ Jeżeli wystąpi wyjątek, należy go obsłużyć i wyświetlić klasę wyjątku
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">try</span><span class="p">:</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">line</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; &#39;</span><span class="p">)</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            
-        <span class="c1"># zdefiniowac zmienna rest</span>
-        
-        
-        <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;eval&#39;</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
-        <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-            <span class="k">pass</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid command.&#39;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="k">pass</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bye&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">repl</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; &#39;</span><span class="p">)</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;eval&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
+            <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid command.&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bye&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -16968,7 +16973,7 @@ Jeżeli wystąpi wyjątek, należy go obsłużyć i wyświetlić klasę wyjątku
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">repl</span><span class="p">()</span>
@@ -16990,19 +16995,15 @@ Jeżeli wystąpi wyjątek, należy go obsłużyć i wyświetlić klasę wyjątku
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>&gt;&gt;&gt; eval 2+2
 4
-&gt;&gt;&gt; eval &#39;asdf&#39; + &#39;qwer&#39;
-asdfqwer
-&gt;&gt;&gt; eval [23] + [1, 2, 3]
-[23, 1, 2, 3]
-&gt;&gt;&gt; eval [2*i for i in range(10)]
-[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
 &gt;&gt;&gt; eval 2/0
 ZeroDivisionError
+&gt;&gt;&gt; eval &#39;asdf&#39; + &#39;qwer&#39;
+asdfqwer
+&gt;&gt;&gt; 
 &gt;&gt;&gt; asdf
 Invalid command.
-&gt;&gt;&gt; 
+Bye
 &gt;&gt;&gt; exit
-Bye!
 </pre>
 </div>
 </div>
@@ -19129,34 +19130,35 @@ Funkcja powinna zwrócić listę z dodanym elementem.</p>
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">repl</span><span class="p">():</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s2">&quot;&gt;&gt;&gt; &quot;</span><span class="p">)</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; &#39;</span><span class="p">)</span>
             <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">command</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
             <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;eval&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
+            <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
                 <span class="k">pass</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">rest</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
-                    <span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-                    
-                <span class="n">command</span> <span class="o">=</span> <span class="n">command</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;exit&#39;</span><span class="p">:</span>
-                    <span class="k">break</span>
-                <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s1">&#39;eval&#39;</span><span class="p">:</span>
-                    <span class="n">rest</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="n">value</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
-                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid command.&#39;</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid command.&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
         <span class="k">pass</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;Bye!&quot;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bye&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -19173,6 +19175,66 @@ Funkcja powinna zwrócić listę z dodanym elementem.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        <span class="n">rest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>    
+        
+    <span class="k">return</span> <span class="n">command</span><span class="p">,</span> <span class="n">rest</span>
+
+<span class="k">def</span> <span class="nf">eval_command</span><span class="p">(</span><span class="n">rest</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        
+<span class="k">def</span> <span class="nf">exit_command</span><span class="p">(</span><span class="n">rest</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">KeyboardInterrupt</span>
+    
+<span class="k">def</span> <span class="nf">empty_command</span><span class="p">(</span><span class="n">rest</span><span class="p">):</span>
+    <span class="k">pass</span>
+    
+<span class="n">commands</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;eval&#39;</span><span class="p">:</span> <span class="n">eval_command</span><span class="p">,</span>
+    <span class="s1">&#39;exit&#39;</span><span class="p">:</span> <span class="n">exit_command</span><span class="p">,</span>
+    <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="n">empty_command</span><span class="p">,</span>
+<span class="p">}</span>
+    
+<span class="k">def</span> <span class="nf">repl</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt; &#39;</span><span class="p">)</span>
+            <span class="n">command</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">split_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">commands</span><span class="p">[</span><span class="n">command</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Invalid command.&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">func</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+                
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bye&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
