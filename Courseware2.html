@@ -15352,6 +15352,34 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[178]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">class</span> <span class="nc">RecentlyUsedList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;RecentlyUsedList({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -15364,7 +15392,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[179]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span> <span class="o">=</span> <span class="n">RecentlyUsedList</span><span class="p">()</span>
@@ -15377,10 +15405,10 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[180]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">rul</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">rul</span><span class="p">)</span>  <span class="c1"># rul.__len__()</span>
 </pre></div>
 
 </div>
@@ -15393,7 +15421,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[54]:</div>
+<div class="prompt output_prompt">Out[180]:</div>
 
 
 
@@ -15410,7 +15438,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[181]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span>
@@ -15426,7 +15454,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[55]:</div>
+<div class="prompt output_prompt">Out[181]:</div>
 
 
 
@@ -15443,7 +15471,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[182]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
@@ -15457,7 +15485,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[183]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -15473,7 +15501,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[57]:</div>
+<div class="prompt output_prompt">Out[183]:</div>
 
 
 
@@ -15490,7 +15518,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[184]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -15506,7 +15534,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[58]:</div>
+<div class="prompt output_prompt">Out[184]:</div>
 
 
 
@@ -15523,7 +15551,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[185]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">rul</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -15544,12 +15572,12 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_subarea output_text output_error">
 <pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">IndexError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-59-9af6dc8555ff&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-red-fg">-------------------------------------------------------------------</span>
+<span class="ansi-red-fg">IndexError</span>                        Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-185-9af6dc8555ff&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>rul<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">2</span><span class="ansi-blue-fg">]</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-52-3ea8935eaf40&gt;</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, index)</span>
+<span class="ansi-green-fg">&lt;ipython-input-178-3ea8935eaf40&gt;</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, index)</span>
 <span class="ansi-green-intense-fg ansi-bold">     14</span> 
 <span class="ansi-green-intense-fg ansi-bold">     15</span>     <span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> index<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_list<span class="ansi-blue-fg">[</span>index<span class="ansi-blue-fg">]</span>
@@ -15566,7 +15594,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[187]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="nb">repr</span><span class="p">(</span><span class="n">rul</span><span class="p">)</span>
@@ -15582,7 +15610,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[60]:</div>
+<div class="prompt output_prompt">Out[187]:</div>
 
 
 
@@ -15599,7 +15627,7 @@ Użyteczna będzie tutaj <a href="https://docs.python.org/2/reference/datamodel.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[188]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">rul</span><span class="p">)</span>
