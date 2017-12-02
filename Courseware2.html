@@ -14908,6 +14908,53 @@ Można stworzyć nową klasę wyjątków poprzez dziedziczenie po klasie bazowej
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">STUDENT_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;undergraduate&#39;</span><span class="p">,</span> <span class="s1">&#39;postgraduate&#39;</span><span class="p">)</span>
+<span class="n">EMPLOYMENT_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;permanent&#39;</span><span class="p">,</span> <span class="s1">&#39;temporary&#39;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">surname</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surname</span> <span class="o">=</span> <span class="n">surname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">number</span>
+
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_type</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">student_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STUDENT_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;student_type must be one of {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">STUDENT_TYPES</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_type</span> <span class="o">=</span> <span class="n">student_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">enrol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">StaffMember</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employment_type</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StaffMember</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">employment_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">EMPLOYMENT_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;employment_type must be one of {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">EMPLOYMENT_TYPES</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employment_type</span> <span class="o">=</span> <span class="n">employment_type</span>
+
+
+<span class="k">class</span> <span class="nc">Lecturer</span><span class="p">(</span><span class="n">StaffMember</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Lecturer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">courses_taught</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">assign_teaching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">course</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">courses_taught</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">course</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -14962,10 +15009,10 @@ Można stworzyć nową klasę wyjątków poprzez dziedziczenie po klasie bazowej
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[163]:</div>
+<div class="prompt input_prompt">In&nbsp;[175]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;postgraduate&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">,</span> <span class="s1">&#39;SMTJNX045&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;postgraduate&#39;</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">)</span>
 <span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">surname</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">student_type</span><span class="p">,</span> <span class="n">student</span><span class="o">.</span><span class="n">classes</span>
 </pre></div>
 
@@ -14979,15 +15026,38 @@ Można stworzyć nową klasę wyjątków poprzez dziedziczenie po klasie bazowej
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[163]:</div>
+<div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(&#39;Jane&#39;, &#39;Smith&#39;, &#39;SMTJNX045&#39;, &#39;postgraduate&#39;, [])</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;Jane&#39;, &#39;Smith&#39;)
+{}
+</pre>
+</div>
 </div>
 
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">-------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-175-3bdf02af8353&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>student <span class="ansi-blue-fg">=</span> Student<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;postgraduate&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;Jane&#39;</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#39;Smith&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> student<span class="ansi-blue-fg">.</span>name<span class="ansi-blue-fg">,</span> student<span class="ansi-blue-fg">.</span>surname<span class="ansi-blue-fg">,</span> student<span class="ansi-blue-fg">.</span>number<span class="ansi-blue-fg">,</span> student<span class="ansi-blue-fg">.</span>student_type<span class="ansi-blue-fg">,</span> student<span class="ansi-blue-fg">.</span>classes
+
+<span class="ansi-green-fg">&lt;ipython-input-173-f371047fdc6f&gt;</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, student_type, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span>         <span class="ansi-green-fg">print</span><span class="ansi-blue-fg">(</span>args<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span>         <span class="ansi-green-fg">print</span><span class="ansi-blue-fg">(</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg">         </span>super<span class="ansi-blue-fg">(</span>Student<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>__init__<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span>         <span class="ansi-green-fg">if</span> student_type <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> STUDENT_TYPES<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     18</span>             <span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;student_type must be one of {}&#39;</span><span class="ansi-blue-fg">.</span>format<span class="ansi-blue-fg">(</span>STUDENT_TYPES<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: __init__() takes exactly 4 arguments (3 given)</pre>
+</div>
 </div>
 
 </div>
