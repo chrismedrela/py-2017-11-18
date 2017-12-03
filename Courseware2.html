@@ -17871,7 +17871,7 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[246]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pattern</span> <span class="o">=</span> <span class="s1">&#39;abc.e&#39;</span>
@@ -17888,13 +17888,13 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[246]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;_sre.SRE_Match at 0x7f8cd8020920&gt;</pre>
+<pre>&lt;_sre.SRE_Match at 0x7f6056f33440&gt;</pre>
 </div>
 
 </div>
@@ -18009,13 +18009,100 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="re.findall">re.findall<a class="anchor-link" href="#re.findall">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[253]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;[A-Z]{2}&#39;</span><span class="p">,</span> <span class="s1">&#39;aUUaUZaYUa&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[254]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[254]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 3)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[257]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;[A-Z]{2}&#39;</span><span class="p">,</span> <span class="s1">&#39;aUUaUZaYUa&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[257]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;UU&#39;, &#39;UZ&#39;, &#39;YU&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Kompilacja-wzorc&#243;w">Kompilacja wzorc&#243;w<a class="anchor-link" href="#Kompilacja-wzorc&#243;w">&#182;</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[247]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
@@ -18028,7 +18115,7 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[248]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;abcde&#39;</span><span class="p">)</span>
@@ -18044,13 +18131,13 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[248]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;_sre.SRE_Match at 0x7f8cd8020510&gt;</pre>
+<pre>&lt;_sre.SRE_Match at 0x7f6056f33578&gt;</pre>
 </div>
 
 </div>
@@ -18287,6 +18374,39 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 
 <div class="output_text output_subarea output_execute_result">
 <pre>{&#39;char&#39;: &#39;f&#39;}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[259]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;(?P&lt;dwie_litery&gt;[A-Z]{2})+$&#39;</span><span class="p">,</span> <span class="s1">&#39;UUABCD&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[259]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;dwie_litery&#39;: &#39;CD&#39;}</pre>
 </div>
 
 </div>
@@ -18581,6 +18701,83 @@ python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dopasuj-do-pocz&#261;tku-napisu:-^-">Dopasuj do pocz&#261;tku napisu: ^ <a class="tocSkip" /><a class="anchor-link" href="#Dopasuj-do-pocz&#261;tku-napisu:-^-">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>match</code> zawsze dopasowuje do początku napisu:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[235]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">assert</span>     <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;bc&#39;</span><span class="p">,</span> <span class="s1">&#39;bc&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;bc&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ale <code>search</code> już nie:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[236]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">assert</span>     <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bc&#39;</span><span class="p">,</span> <span class="s1">&#39;bc&#39;</span><span class="p">)</span>
+<span class="k">assert</span>     <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bc&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Chyba, że użyjemy <code>^</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[237]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">assert</span>     <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;bc&#39;</span><span class="p">,</span> <span class="s1">&#39;bc&#39;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;^bc&#39;</span><span class="p">,</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Proste-Regexpy">Proste Regexpy<a class="anchor-link" href="#Proste-Regexpy">&#182;</a></h2>
 </div>
 </div>
@@ -18694,6 +18891,23 @@ Dodaj nazwane grupy tak, aby można było wyciągnąć określone dane.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pattern1</span> <span class="o">=</span> <span class="s1">&#39;ab[cd]?$&#39;</span>
+<span class="n">regex1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    ab                   # match &quot;ab&quot; characters</span>
+<span class="s1">    (?P&lt;optional_group&gt;  # let&#39;s create a group to extract data</span>
+<span class="s1">      [cd]?              # match c, d or none character</span>
+<span class="s1">    )                    # end of &quot;optional_group&quot; group</span>
+<span class="s1">    $                    # match to the end of string</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -18753,6 +18967,23 @@ Dodaj nazwane grupy tak, aby można było wyciągnąć określone dane.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pattern2</span> <span class="o">=</span> <span class="s1">&#39;[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{3}$&#39;</span>
+<span class="n">regex2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    (?P&lt;group1&gt; [0-9]{3})</span>
+<span class="s1">    [ -]?</span>
+<span class="s1">    (?P&lt;group2&gt; [0-9]{3})</span>
+<span class="s1">    [ -]?</span>
+<span class="s1">    (?P&lt;group3&gt; [0-9]{3})</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -18814,6 +19045,31 @@ Dodaj nazwane grupy tak, aby można było wyciągnąć określone dane.</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pattern3</span> <span class="o">=</span> <span class="s1">&#39;(\+[0-9]{1,2}[ -]?)?[0-9]{3}[ -]?[0-9]{3}[ -]?[0-9]{3}$&#39;</span>
+<span class="n">regex3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    (                      # let&#39;s group all the prefix related stuff</span>
+<span class="s1">      \+                   # plus sign</span>
+<span class="s1">      (?P&lt;prefix&gt;          # extract prefix number</span>
+<span class="s1">        [0-9]{1,2}         # prefix is one or two digits</span>
+<span class="s1">      )</span>
+<span class="s1">      [ -]?                # optional space or dash</span>
+<span class="s1">    )?                     # entire prefix is optional</span>
+<span class="s1">    </span>
+<span class="s1">    (?P&lt;group1&gt; [0-9]{3})  # frist three digits</span>
+<span class="s1">    [ -]?                  # optional space or dash</span>
+<span class="s1">    (?P&lt;group2&gt; [0-9]{3})  # second three digits</span>
+<span class="s1">    [ -]?                  # optional space or dash</span>
+<span class="s1">    (?P&lt;group3&gt; [0-9]{3})  # last three digits</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
