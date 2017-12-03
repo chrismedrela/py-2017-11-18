@@ -17082,7 +17082,7 @@ Jej użycie powoduje, że wystarczy zdefiniować metody <code>__le__</code> i <c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[170]:</div>
+<div class="prompt input_prompt">In&nbsp;[202]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -17137,7 +17137,7 @@ Jej użycie powoduje, że wystarczy zdefiniować metody <code>__le__</code> i <c
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[175]:</div>
+<div class="prompt input_prompt">In&nbsp;[203]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="k">class</span> <span class="nc">LearnerMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -17339,7 +17339,7 @@ Katalog mymodules musi być umieszczony w jednym z katalogów znajdujących się
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[206]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -17356,7 +17356,7 @@ Katalog mymodules musi być umieszczony w jednym z katalogów znajdujących się
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+<div class="prompt output_prompt">Out[206]:</div>
 
 
 
@@ -17397,6 +17397,39 @@ Katalog mymodules musi być umieszczony w jednym z katalogów znajdujących się
 
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;module &#39;os&#39; from &#39;/usr/lib/python2.7/os.pyc&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[207]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[207]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/home/chris/courses/py-2017-11-18&#39;</pre>
 </div>
 
 </div>
@@ -17473,6 +17506,40 @@ Katalog mymodules musi być umieszczony w jednym z katalogów znajdujących się
 
 <div class="output_text output_subarea output_execute_result">
 <pre>&lt;module &#39;posixpath&#39; from &#39;/usr/lib/python2.7/posixpath.pyc&#39;&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[208]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
+<span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[208]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;/home/chris/courses/py-2017-11-18&#39;</pre>
 </div>
 
 </div>
@@ -17752,14 +17819,14 @@ Aktywacji trzeba dokonać w każdym terminalu osobno.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&#9734;-&#262;wiczenie">&#9734; &#262;wiczenie<a class="anchor-link" href="#&#9734;-&#262;wiczenie">&#182;</a></h2><p>Stwórz dwa virtualenvy.</p>
-<p>W pierwszym zainstaluj dowolną wersję Pythona 2 oraz bibliotekę <code>python-cjson</code> w wersji 1.2.1.</p>
-<p>W drugim zainstaluj dowolną wersję Pythona 2, ale inną niż poprzednio.
-Dodatkowo, zainstaluj tę samą bibliotekę co w pierwszym venvie, ale w wersji 1.2.0.</p>
+<p>W pierwszym zainstaluj dowolną wersję Pythona 2 oraz bibliotekę <code>flask</code> w wersji 0.12.0.</p>
+<p>W drugim zainstaluj dowolną wersję Pythona 2.
+Dodatkowo, zainstaluj tę samą bibliotekę co w pierwszym venvie, ale w wersji 0.12.1.</p>
 <p>Przydatne polecenia:</p>
 <div class="highlight"><pre><span></span>python --version
-pip freeze <span class="p">|</span> grep cjson
-python -c <span class="s2">&quot;import cjson&quot;</span>
-python -c <span class="s2">&quot;import cjson; print(cjson.__version__)&quot;</span>
+pip freeze <span class="p">|</span> grep flask
+python -c <span class="s2">&quot;import flask&quot;</span>
+python -c <span class="s2">&quot;import flask; print(cjson.__version__)&quot;</span>
 </pre></div>
 
 </div>
